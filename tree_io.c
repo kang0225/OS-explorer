@@ -40,17 +40,20 @@ TreeNode* load_tree_helper(FILE* file, int level) {
     node = malloc(sizeof(TreeNode));
     sscanf(line + current_level, "%c %s\n", &node->type, node->name);
     node->left = load_tree_helper(file, level + 1);
+    if (node->left != NULL)
+    	node->left->parent = node;
     node->right = load_tree_helper(file, level);
+    if (node->right != NULL)
+    	node->right->parent = node;
 
     return node;
 }
 
 void load_tree_from_file(DirectoryTree* dTree, const char* filename) {
     FILE* file = fopen(filename, "r");
-    if (!file) {
-        // 파일이 존재하지 않으면 빈 트리 초기화
-        perror("fopen"); // 수정된 부분: 파일이 없을 때의 오류 메시지 출력
-        TreeNode* root = malloc(sizeof(TreeNode)); //빈 트리 초기화
+    if (!file) { 
+        perror("fopen");
+        TreeNode* root = malloc(sizeof(TreeNode));
         strcpy(root->name, "/");
         root->type = 'd';
         root->left = NULL;

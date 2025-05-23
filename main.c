@@ -94,7 +94,7 @@ int main() {
                 save_tree_to_file(&dTree, SAVE_FILE);
             } else {
                 printf("cat: missing argument\n");
-                printf("사용법: cat <filename>\n")
+                printf("사용법: cat <filename>\n");
             }
         } 
         else if (strcmp(cmd, "cd") == 0) {
@@ -150,7 +150,6 @@ int main() {
             }
         } */
         else if (strcmp(cmd, "pwd") == 0) {
-            load_tree_from_file(&dTree, "tree_state.txt");  // 파일에서 트리 로드
             get_pwd(&dTree);  // 트리에서 현재 경로 출력
         }
         else if (strcmp(cmd, "touch") == 0) {
